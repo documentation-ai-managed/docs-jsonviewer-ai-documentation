@@ -1,0 +1,340 @@
+---
+title: Configuration Examples
+description: Practical JSON configuration examples for app settings, feature flags, environments, and logging, plus how to inspect them with JSON Viewer.
+---
+
+## Overview
+
+This page gives you copy-pasteable JSON configuration examples you can load into JSON Viewer to understand and validate common patterns:
+
+- Basic app settings
+- Feature flags
+- Environment-specific overrides
+- Logging levels and modules
+
+Use these examples as starting points for your own applications and services.
+
+<Callout kind="info">
+
+All examples below are valid JSON. Comments and explanations appear in the surrounding text, not inside the JSON, so you can paste them directly into JSON Viewer.
+
+</Callout>
+
+## Using JSON Viewer with configuration files
+
+You can load any of the examples in two ways:
+
+<Tabs>
+  <Tab title="Paste JSON" icon="clipboard">
+
+    1. Copy a JSON example from this page.  
+    2. Open JSON Viewer.  
+    3. Paste into the main text area.  
+    4. Inspect the tree view to see sections like `app`, `features`, or `logging`.
+
+  </Tab>
+  <Tab title="Upload file" icon="upload">
+
+    1. Save one of the examples to a file such as `config.json`.  
+    2. In JSON Viewer, use the upload area or `Choose File`.  
+    3. Browse the parsed tree and use error messages if the file is not valid JSON.
+
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+
+If JSON Viewer shows a parse error, check for trailing commas, missing quotes, or mismatched braces. Fix the file and reload to confirm it parses correctly before deploying.
+
+</Callout>
+
+## Example 1: Basic application settings
+
+This configuration captures app-level settings you might share across all environments.
+
+```json
+{
+  "app": {
+    "name": "Acme Dashboard",
+    "version": "1.0.0",
+    "defaultLocale": "en-US",
+    "supportedLocales": ["en-US", "fr-FR", "de-DE"]
+  },
+  "server": {
+    "port": 3000,
+    "baseUrl": "https://dashboard.example.com",
+    "sessionTimeoutSeconds": 3600
+  },
+  "security": {
+    "enableHttps": true,
+    "allowedOrigins": ["https://dashboard.example.com"],
+    "csrfProtection": true
+  }
+}
+```
+
+### What to inspect in JSON Viewer
+
+- Expand the `app` node to verify name, version, and locale settings.
+- Expand `server` to review port and base URL.
+- Check `security` to confirm cross-origin and HTTPS-related settings.
+
+When you edit values (for example, change the port or add locales), paste the updated JSON back into JSON Viewer to ensure it still parses correctly.
+
+## Example 2: Feature flags
+
+Feature flags let you enable or disable parts of your app without redeploying code.
+
+```json
+{
+  "features": {
+    "newOnboardingFlow": {
+      "enabled": false,
+      "description": "Gradually roll out the redesigned onboarding experience.",
+      "rolloutPercentage": 0
+    },
+    "betaReporting": {
+      "enabled": true,
+      "description": "Enables experimental reports for internal users.",
+      "allowedRoles": ["admin", "analyst"]
+    },
+    "maintenanceMode": {
+      "enabled": false,
+      "message": "The system is undergoing maintenance. Please try again later."
+    }
+  }
+}
+```
+
+### What to inspect in JSON Viewer
+
+- Verify that each feature under `features` has:
+  - An `enabled` boolean.
+  - Optional metadata like `description` and `allowedRoles`.
+- Use the tree to quickly scan which features are on or off.
+- If you add a new feature flag, reload the JSON and confirm it appears in the `features` object with the expected structure.
+
+<Callout kind="tip">
+
+Use JSON Viewer search to quickly find a specific feature name, such as `newOnboardingFlow`, when your configuration grows large.
+
+</Callout>
+
+## Example 3: Base config plus environment overrides
+
+A common pattern is to have a shared `base` configuration and per-environment overrides such as `development`, `staging`, and `production`.
+
+Here is a single JSON file that contains both the base settings and overrides:
+
+```json
+{
+  "base": {
+    "app": {
+      "name": "Acme API",
+      "defaultLocale": "en-US"
+    },
+    "api": {
+      "requestTimeoutMs": 5000,
+      "retryAttempts": 2
+    },
+    "logging": {
+      "level": "info",
+      "format": "json"
+    }
+  },
+  "environments": {
+    "development": {
+      "api": {
+        "baseUrl": "http://localhost:4000",
+        "requestTimeoutMs": 10000
+      },
+      "logging": {
+        "level": "debug"
+      }
+    },
+    "staging": {
+      "api": {
+        "baseUrl": "https://staging-api.example.com"
+      },
+      "logging": {
+        "level": "info"
+      }
+    },
+    "production": {
+      "api": {
+        "baseUrl": "https://api.example.com",
+        "retryAttempts": 3
+      },
+      "logging": {
+        "level": "warn"
+      }
+    }
+  }
+}
+```
+
+### How to read this in JSON Viewer
+
+1. Expand `base` to understand the defaults that apply to all environments.
+2. Expand `environments.development`, `environments.staging`, and `environments.production` to see differences:
+   - `base.api.requestTimeoutMs` is `5000`, but `development` overrides it to `10000`.
+   - `base.logging.level` is `info`, but `production` uses `warn` to reduce log volume.
+3. Use the tree to compare effective values for each environment without scrolling through a long flat document.
+
+<Callout kind="info">
+
+JSON itself does not automatically merge `base` and `environments`. Your application code or configuration loader must implement the merge behavior. JSON Viewer helps you inspect both base values and overrides to confirm they are defined as expected.
+
+</Callout>
+
+## Example 4: Split files for base and environment
+
+Another common pattern is to keep base configuration and overrides in separate files. JSON Viewer can help you inspect each file independently.
+
+<Tabs>
+  <Tab title="base.json" icon="file-text">
+
+    ```json
+    {
+      "app": {
+        "name": "Acme Frontend",
+        "defaultLocale": "en-US",
+        "enableTracking": true
+      },
+      "api": {
+        "baseUrl": "https://api.example.com",
+        "requestTimeoutMs": 8000
+      },
+      "logging": {
+        "level": "info",
+        "format": "text"
+      }
+    }
+    ```
+
+  </Tab>
+  <Tab title="config.development.json" icon="settings">
+
+    ```json
+    {
+      "api": {
+        "baseUrl": "http://localhost:5000",
+        "requestTimeoutMs": 15000
+      },
+      "logging": {
+        "level": "debug"
+      },
+      "app": {
+        "enableTracking": false
+      }
+    }
+    ```
+
+  </Tab>
+</Tabs>
+
+### How to use this pattern with JSON Viewer
+
+1. Load `base.json` in JSON Viewer:
+   - Confirm core keys like `app`, `api`, and `logging` exist.
+   - Review default values for tracking and logging.
+
+2. Load `config.development.json`:
+   - Check which values are overridden, such as `api.baseUrl` and `logging.level`.
+   - Ensure overrides only contain keys your app expects.
+
+3. In your app, merge `base.json` with `config.development.json` (logic in your code or build system). Use JSON Viewer to verify each file is valid JSON and has the expected structure before merging.
+
+## Example 5: Logging configuration by module
+
+Logging configuration often includes levels per module or namespace.
+
+```json
+{
+  "logging": {
+    "defaultLevel": "info",
+    "format": "json",
+    "timestamp": true,
+    "outputs": [
+      {
+        "type": "console",
+        "level": "debug"
+      },
+      {
+        "type": "file",
+        "level": "info",
+        "filePath": "/var/log/acme-app.log",
+        "maxSizeMb": 100,
+        "maxFiles": 5
+      }
+    ],
+    "modules": {
+      "http": {
+        "level": "warn"
+      },
+      "database": {
+        "level": "error",
+        "slowQueryThresholdMs": 500
+      },
+      "auth": {
+        "level": "debug"
+      }
+    }
+  }
+}
+```
+
+### What to inspect in JSON Viewer
+
+- Expand `logging.outputs` to verify console and file output definitions.
+- Check `logging.modules` to confirm each subsystem has the right `level`.
+- When you add new modules or outputs, reload into JSON Viewer to ensure the array and object structures remain valid.
+
+<Callout kind="tip">
+
+Use JSON Viewer&apos;s tree view to quickly see which modules are set to noisy levels like `debug` so you can adjust them before deploying to production.
+
+</Callout>
+
+## Example 6: Third-party integration settings
+
+Integrations often require multiple URLs, timeouts, and credentials.
+
+```json
+{
+  "integrations": {
+    "paymentProvider": {
+      "enabled": true,
+      "baseUrl": "https://payments.example-pay.com",
+      "apiKey": "env:PAYMENT_PROVIDER_API_KEY",
+      "timeoutMs": 7000,
+      "retryAttempts": 3
+    },
+    "emailService": {
+      "enabled": true,
+      "baseUrl": "https://api.mailer.example",
+      "apiKey": "env:EMAIL_API_KEY",
+      "timeoutMs": 5000,
+      "defaultFromAddress": "no-reply@example.com"
+    },
+    "analytics": {
+      "enabled": false,
+      "provider": "ExampleAnalytics",
+      "trackingId": "env:ANALYTICS_TRACKING_ID"
+    }
+  }
+}
+```
+
+In this example, sensitive values like `apiKey` and `trackingId` reference environment variables using a simple `env:` prefix.
+
+### How JSON Viewer helps here
+
+- Expand `integrations` to confirm each service is present and `enabled` as expected.
+- Scan for hard-coded secrets. If your config accidentally contains real keys, JSON Viewer makes them easy to spot so you can move them to environment variables instead.
+- Validate new integrations by pasting updated JSON and checking for parsing errors or missing required fields.
+
+## Next steps
+
+- For a guided walkthrough of loading and exploring data, see [Quick Start](/quickstart).
+- For more general usage details and tips, see the main [Guide](/guide).

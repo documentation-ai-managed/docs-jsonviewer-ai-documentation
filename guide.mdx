@@ -1,0 +1,161 @@
+---
+title: User Guide for JSON Viewer
+description: Step-by-step instructions on utilizing the core features of JSON Viewer for effective JSON management.
+---
+
+## Overview
+
+JSON Viewer helps you view, validate, beautify, and export JSON data efficiently. Paste your JSON into the editor to explore nested structures, catch syntax errors, format for readability, and download results in multiple formats. This guide walks you through each core feature.
+
+<Columns cols={2}>
+  <Card title="View & Navigate" icon="search" href="#viewing">
+    Expand and collapse objects to inspect data deeply.
+  </Card>
+  <Card title="Validate & Beautify" icon="check-circle" href="#validation">
+    Spot errors and reformat instantly.
+  </Card>
+  <Card title="Export Options" icon="download" href="#exporting">
+    Save as JSON, CSV, or copy to clipboard.
+  </Card>
+</Columns>
+
+## Viewing and Navigating JSON Structures
+
+Access the viewer at [jsonviewer.ai](https://jsonviewer.ai). Paste your JSON to start.
+
+<Steps>
+  <Step title="Paste JSON" icon="clipboard">
+    Enter your data in the left panel. For example:
+    
+    <CodeGroup tabs="Minified,Pretty">
+    ```json
+    {"user":{"name":"Alice","age":30,"orders":[{"id":1,"item":"Book"},{"id":2,"item":"Laptop"}]}}
+    ```
+    ```json
+    {
+      "user": {
+        "name": "Alice",
+        "age": 30,
+        "orders": [
+          {
+            "id": 1,
+            "item": "Book"
+          },
+          {
+            "id": 2,
+            "item": "Laptop"
+          }
+        ]
+      }
+    }
+    ```
+    </CodeGroup>
+  </Step>
+  <Step title="Navigate Tree" icon="git-branch">
+    Click arrows to expand `{`objects`}` or `{`arrays`}`. Search with Ctrl+F to find keys like `user.name`.
+  </Step>
+  <Step title="Copy Path" icon="copy">
+    Right-click any value to copy its JSON path, e.g. `user.orders[0].id`.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Use the tree view for complex nested data. Hover over values for tooltips with types like `string` or `number`.
+</Callout>
+
+## Validating JSON for Errors
+
+Ensure your JSON is syntactically correct before processing.
+
+<Tabs>
+  <Tab title="Valid JSON" icon="check-circle">
+    Paste clean data:
+    
+    ```json
+    {
+      "apiResponse": {
+        "status": "success",
+        "data": ["item1", "item2"]
+      }
+    }
+    ```
+    
+    The viewer highlights it in green.
+  </Tab>
+  <Tab title="Invalid JSON" icon="x-circle">
+    Try malformed input:
+    
+    ```json
+    {
+      "key": "value"
+    "missing comma"
+    }
+    ```
+    
+    Errors appear in red with line numbers and fixes.
+  </Tab>
+</Tabs>
+
+<Callout kind="alert">
+  Always validate large API responses. Common issues include trailing commas or unquoted keys.
+</Callout>
+
+## Beautifying and Formatting JSON
+
+Transform minified JSON into readable format.
+
+<Steps>
+  <Step title="Auto-Beautify" icon="magic">
+    Paste minified JSON. Click "Beautify" to add indentation and line breaks.
+  </Step>
+  <Step title="Customize" icon="settings">
+    Adjust indent size (2 or 4 spaces) and toggle quotes for keys.
+  </Step>
+</Steps>
+
+Example transformation:
+
+````json
+Minified: {"config":{"theme":"dark","features":["search","export"]}}
+````
+
+Beautified:
+
+```json
+{
+  "config": {
+    "theme": "dark",
+    "features": [
+      "search",
+      "export"
+    ]
+  }
+}
+```
+
+## Exporting Results
+
+Save your processed JSON easily.
+
+<Tabs>
+  <Tab title="Download JSON" icon="download">
+    Click "Download JSON" for a `.json` file.
+  </Tab>
+  <Tab title="Copy Formatted" icon="copy">
+    Select "Copy to Clipboard" for the beautified version.
+  </Tab>
+  <Tab title="Convert to CSV" icon="table">
+    For flat arrays, export as CSV:
+    
+    | id | name   | age |
+    |----|--------|-----|
+    | 1  | Alice  | 30  |
+    | 2  | Bob    | 25  |
+  </Tab>
+</Tabs>
+
+<Expandable title="Advanced Export Tips" default-open="false">
+  Use browser extensions for bulk exports. For APIs, pipe responses directly via `curl | beautify`.
+</Expandable>
+
+Master these features to handle JSON workflows faster. Experiment with your own data for best results.

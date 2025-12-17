@@ -1,0 +1,104 @@
+---
+title: Frequently Asked Questions
+description: Answers to common queries about JSON Viewer to help resolve doubts and optimize your experience.
+---
+
+## Common Usage Issues
+
+JSON Viewer handles most JSON data smoothly, but you might encounter parsing errors with malformed input or large files. Follow these steps to troubleshoot.
+
+<Steps>
+  <Step title="Paste or Upload JSON" icon="upload">
+    Copy your JSON data and paste it into the editor, or upload a `.json` file. Ensure no trailing commas or unescaped quotes.
+  </Step>
+  <Step title="Check for Errors" icon="alert-triangle">
+    Look for red highlights indicating syntax issues. Common problems include missing brackets or invalid values.
+  </Step>
+  <Step title="Validate and Beautify" icon="check-circle">
+    Click **Validate** to scan for errors. Use **Beautify** to format readable output.
+  </Step>
+</Steps>
+
+<CodeGroup tabs="Valid,Invalid">
+```json
+{
+  "user": {
+    "id": 123,
+    "name": "Jane Doe",
+    "email": "jane@example.com",
+    "orders": ["item1", "item2"]
+  }
+}
+```
+```json
+{
+  "user": {
+    "id": 123,
+    "name": "Jane Doe",
+  "email": "jane@example.com"  // Missing closing brace
+}
+```
+</CodeGroup>
+
+<Callout kind="tip">
+  For files `>10MB`, split them or use desktop tools like VS Code with JSON extensions.
+</Callout>
+
+## Data Privacy and Security
+
+You process all JSON data client-side in your browser. JSON Viewer does not store, log, or transmit your data to any servers.
+
+<Callout kind="info">
+  No data leaves your device. Validation and beautification happen locally using JavaScript, ensuring complete privacy.
+</Callout>
+
+<Callout kind="success">
+  Your sensitive data, like API responses or user profiles, remains secure. Clear the editor or refresh the page to remove content.
+</Callout>
+
+## Tool Limitations and Alternatives
+
+JSON Viewer excels at quick viewing and validation but has limits on file size and lacks editing features.
+
+| Limitation | Details | Workaround |
+|------------|---------|------------|
+| File Size | Up to 10MB | Split large JSON or use local tools |
+| No Editing | View-only | Copy beautified JSON to an editor |
+| Browser-Only | No desktop app | Use extensions or CLI tools |
+
+<ExpandableGroup>
+  <Expandable title="Desktop Alternatives" default-open="true">
+    Install tools like **JSON Crack** or **Dadroit JSON Viewer** for offline use with larger files.
+  </Expandable>
+  <Expandable title="Browser Extensions">
+    Try **JSON Viewer** Chrome extension for automatic formatting in DevTools.
+  </Expandable>
+  <Expandable title="CLI Options">
+    Use `jq` for command-line processing:
+
+````bash
+cat data.json | jq '.'
+````
+
+  </Expandable>
+</ExpandableGroup>
+
+<Tabs>
+  <Tab title="Online Tools" icon="globe">
+    jsonviewer.ai (free, unlimited views)  
+    jsonformatter.org (similar features)
+  </Tab>
+  <Tab title="IDEs" icon="code">
+    VS Code: Install **JSON** extension  
+    IntelliJ: Built-in JSON support
+  </Tab>
+</Tabs>
+
+<Columns cols={2}>
+  <Card title="Need Help?" icon="help-circle" href="https://jsonviewer.ai/contact" target="_blank">
+    Contact support for custom issues.
+  </Card>
+  <Card title="Share Feedback" icon="thumbs-up" href="https://github.com/jsonviewer-ai/feedback" target="_blank">
+    Suggest features on GitHub.
+  </Card>
+</Columns>

@@ -1,0 +1,110 @@
+---
+title: Quick Start with JSON Viewer
+description: Learn how to quickly access and use JSON Viewer to handle your first JSON file in minutes.
+---
+
+## Get Started in Minutes
+
+JSON Viewer provides a free online tool at `jsonviewer.ai` to view, validate, and beautify your JSON data. You handle complex structures effortlessly without installing software. Follow these steps to process your first JSON file.
+
+<Columns cols={3}>
+  <Card title="Access Tool" icon="globe" href="https://jsonviewer.ai">
+    Visit the site and start immediately.
+  </Card>
+  <Card title="Paste or Upload" icon="upload" href="#">
+    Load your JSON data quickly.
+  </Card>
+  <Card title="Validate & Beautify" icon="check-circle" href="#">
+    Explore features like tree view and error checking.
+  </Card>
+</Columns>
+
+## Step 1: Access JSON Viewer
+
+Visit `https://jsonviewer.ai` in your browser. No account or signup required. The tool loads instantly for immediate use.
+
+<Callout kind="tip">
+  Bookmark `jsonviewer.ai` for quick access on future visits.
+</Callout>
+
+## Step 2: Load Your JSON Data
+
+Choose between pasting text or uploading a file.
+
+<Tabs>
+  <Tab title="Paste JSON" icon="clipboard">
+    Copy your JSON and paste it directly.
+
+    <Steps>
+      <Step title="Copy JSON">
+        Select realistic data like this API response:
+      </Step>
+      <Step title="Paste Data">
+        ```json
+        {"user":{"id":123,"name":"Jane Doe","email":"jane@example.com","orders":[{"id":456,"total":29.99},{"id":789,"total":15.50}]}}
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Upload File" icon="upload">
+    Drag and drop or select a `.json` file.
+
+    <Steps>
+      <Step title="Prepare File">
+        Save JSON to a file named `data.json`.
+      </Step>
+      <Step title="Upload">
+        Drag the file into the upload area or click "Choose File".
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Step 3: Explore the Interface
+
+Once loaded, discover these core features:
+
+<ExpandableGroup>
+  <Expandable title="Tree View" default-open="true">
+    Expand and collapse nested objects. Click nodes to navigate deep structures like `{user.orders}` arrays.
+  </Expandable>
+  <Expandable title="Validation">
+    The tool highlights syntax errors in red. Fix issues like missing commas or invalid values.
+  </Expandable>
+  <Expandable title="Beautify">
+    Click "Beautify" to format minified JSON for readability.
+  </Expandable>
+</ExpandableGroup>
+
+<CodeGroup tabs="Minified,Beautified">
+  ```json
+  {"user":{"id":123,"name":"Jane Doe","email":"jane@example.com","orders":[{"id":456,"total":29.99},{"id":789,"total":15.50}]}}
+  ```
+  ```json
+  {
+    "user": {
+      "id": 123,
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "orders": [
+        {
+          "id": 456,
+          "total": 29.99
+        },
+        {
+          "id": 789,
+          "total": 15.50
+        }
+      ]
+    }
+  }
+  ```
+</CodeGroup>
+
+<Callout kind="success">
+  Your JSON now displays with syntax highlighting, making `{nested}` objects easy to scan.
+</Callout>
+
+## Next Steps
+
+Copy formatted JSON, download as a file, or share via URL. Experiment with larger datasets to see validation in action. This quickstart equips you to handle real-world JSON from APIs or logs efficiently.

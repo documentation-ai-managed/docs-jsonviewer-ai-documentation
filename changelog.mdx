@@ -1,0 +1,137 @@
+---
+title: Changelog
+description: Review the version history of JSON Viewer, including new features, improvements, and bug fixes.
+---
+
+## Recent Updates
+
+JSON Viewer releases updates regularly to enhance your experience with viewing, validating, and beautifying JSON data. You access the latest version automatically when visiting [jsonviewer.ai](https://jsonviewer.ai). Review changes below to see improvements in tree view rendering, validation speed, and new export options.
+
+<Callout kind="info">
+  Enable notifications in your browser to stay informed about major releases that introduce breaking changes or powerful new features.
+</Callout>
+
+<Columns cols={3}>
+  <Card title="Latest" icon="zap" href="#v2-1-0">
+    v2.1.0 - Enhanced validation and dark mode fixes.
+  </Card>
+  <Card title="Major" icon="rocket" href="#v2-0-0">
+    v2.0.0 - Tree view overhaul and export capabilities.
+  </Card>
+  <Card title="Previous" icon="package" href="#v1-9-0">
+    v1.9.0 - Performance boosts for large files.
+  </Card>
+</Columns>
+
+## v2.1.0 (2024-10-15)
+
+<Update label="2024-10-15" description="v2.1.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Added real-time JSON validation with error highlighting directly in the tree view.
+- Introduced export to CSV for tabular JSON data like arrays of objects.
+
+## Improvements
+
+- Optimized rendering for JSON files `{>10MB}` in size.
+- Enhanced search functionality to match nested paths like `user.profile.address.street`.
+
+## Bug Fixes
+
+- Fixed collapse/expand states not persisting during validation errors.
+- Resolved issue where beautified JSON lost comments in copy operations.
+
+<CodeGroup tabs="Before,After">
+```json
+// Before: No error highlighting
+{
+  "users": [
+    {
+      "name": "Alice",
+      "age": "invalid"  // No visual error
+    }
+  ]
+}
+```
+```json
+// After: Errors highlighted
+{
+  "users": [
+    {
+      "name": "Alice",
+      "age": "invalid"  // Red underline + tooltip
+    }
+  ]
+}
+```
+</CodeGroup>
+
+</Update>
+
+## v2.0.0 (2024-09-20)
+
+<Update label="2024-09-20" description="v2.0.0" tags={["feature", "improvement", "breaking"]}>
+
+## New Features
+
+- Overhauled interactive tree view with drag-to-reorder nodes.
+- Added theme switcher supporting light, dark, and high-contrast modes.
+
+## Improvements
+
+- Increased beautify speed by `{40%}` for deeply nested structures.
+- Better support for JSON Schema validation with custom schemas.
+
+## Breaking Changes
+
+- Removed legacy "compact" view mode; use beautify options instead.
+
+## Bug Fixes
+
+- Fixed parsing errors for JSON with trailing commas in objects.
+- Corrected copy-to-clipboard for selected subtrees.
+
+</Update>
+
+## v1.9.0 (2024-08-10)
+
+<Update label="2024-08-10" description="v1.9.0" tags={["improvement", "bugfix"]}>
+
+## Improvements
+
+- Accelerated load times for JSON payloads `{>5MB}` by lazy-loading branches.
+- Added keyboard shortcuts: `<kbd>Ctrl</kbd>+<kbd>F</kbd>` for search, `<kbd>Ctrl</kbd>+<kbd>B</kbd>` to beautify.
+
+## Bug Fixes
+
+- Patched validation crash on malformed Unicode characters.
+- Ensured consistent indentation in beautified output across browsers.
+
+<Steps>
+  <Step title="Upgrade" icon="download">
+    Refresh your browser tab at [jsonviewer.ai](https://jsonviewer.ai).
+  </Step>
+  <Step title="Test New Features" icon="play">
+    Paste a large JSON file and toggle themes.
+  </Step>
+  <Step title="Validate Schema" icon="shield">
+    Upload a JSON Schema and test your data.
+  </Step>
+</Steps>
+
+</Update>
+
+## Earlier Versions
+
+<ExpandableGroup>
+  <Expandable title="v1.8.0 and prior" default-open="false">
+
+Access full history on [GitHub](https://github.com/jsonviewer-ai/releases). Key highlights include initial tree view (v1.0.0) and first validation engine (v1.5.0).
+
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="tip">
+  Report issues or suggest features via the feedback button in the viewer toolbar.
+</Callout>

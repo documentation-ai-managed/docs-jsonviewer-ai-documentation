@@ -1,0 +1,288 @@
+---
+title: JSON Settings Basics
+description: Learn how to structure, organize, and inspect JSON configuration files using JSON Viewer, with patterns for app, server, logging, features, environments, and integrations.
+---
+
+## Overview
+
+JSON settings files define how your application behaves without changing code. They typically control things like app metadata, server ports, feature flags, logging levels, and environment-specific overrides.
+
+JSON Viewer helps you:
+
+- Inspect complex configuration files in a tree view.
+- Validate syntax and spot invalid JSON quickly.
+- Understand how settings are grouped and inherited across environments.
+
+Use this page to understand common configuration patterns, then explore concrete examples in [Configuration Examples](/json-settings-examples) or follow the general [Guide](/guide) for core JSON Viewer features.
+
+<Columns cols={3}>
+  <Card title="Understand structure" icon="book-open" href="#what-are-json-settings">
+    Learn common sections like `app`, `server`, `logging`, and `features`.
+  </Card>
+  <Card title="Inspect with JSON Viewer" icon="search" href="#exploring-config-files-in-json-viewer">
+    Use tree view, search, and error messages to debug configs.
+  </Card>
+  <Card title="Apply best practices" icon="shield" href="#best-practices-for-json-settings">
+    Organize environments and avoid secrets in config files.
+  </Card>
+</Columns>
+
+## What are JSON settings?
+
+JSON settings (or configuration files) are JSON documents that control runtime behavior. Instead of hard-coding values like ports or API URLs, you put them into a configuration file such as `config.json` or `settings.json`.
+
+Typical use cases:
+
+- Web and backend services.
+- CLI tools and background workers.
+- Frontend apps that load settings at build time or startup.
+
+### Common top-level sections
+
+Most configuration files follow a predictable structure with top-level keys that group related settings.
+
+<Columns cols={3}>
+  <Card title="`app`" icon="package" href="#app-settings">
+    Basic application metadata and defaults.
+  </Card>
+  <Card title="`server`" icon="cloud" href="#server-settings">
+    Ports, hostnames, and timeouts for your service.
+  </Card>
+  <Card title="`logging`" icon="bar-chart" href="#logging-settings">
+    Levels, outputs, and per-module log rules.
+  </Card>
+</Columns>
+
+<Columns cols={3}>
+  <Card title="`features`" icon="zap" href="#feature-flags-and-features">
+    Feature flags and toggles for progressive rollout.
+  </Card>
+  <Card title="`environments`" icon="settings" href="#environment-specific-configuration">
+    Development, staging, and production overrides.
+  </Card>
+  <Card title="`integrations`" icon="code" href="#integrations-and-third-party-services">
+    Settings for external services and APIs.
+  </Card>
+</Columns>
+
+### Why structure matters
+
+A consistent JSON structure makes it easier to:
+
+- Locate settings quickly during debugging.
+- Share configuration across services and teams.
+- Apply overrides safely without duplicating entire files.
+
+The [Configuration Examples](/json-settings-examples) page contains ready-to-use examples of these patterns that you can load directly into JSON Viewer.
+
+## Exploring config files in JSON Viewer
+
+You can load configuration JSON into JSON Viewer to understand its structure and verify it is valid.
+
+<Steps>
+  <Step title="Open JSON Viewer" icon="monitor">
+    
+    Go to [jsonviewer.ai](https://jsonviewer.ai) in your browser.
+
+  </Step>
+  <Step title="Load your configuration" icon="upload">
+    
+    Do one of the following:
+    
+    - Paste the contents of `config.json` into the left panel.
+    - Use the upload option to select a local JSON file.
+
+  </Step>
+  <Step title="Inspect the tree view" icon="git-branch">
+    
+    Expand nodes like `app`, `server`, and `logging` in the tree view. This lets you quickly see all settings and nested objects without scrolling through raw text.
+
+  </Step>
+  <Step title="Search for specific keys" icon="search">
+    
+    Use your browser search (<kbd>Ctrl</kbd>+<kbd>F</kbd> or <kbd>Cmd</kbd>+<kbd>F</kbd>) to find configuration keys such as `port`, `baseUrl`, or `logLevel`. The tree view helps you confirm where the key lives in the structure.
+
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  When comparing two configuration files (for example, development vs production), open them in separate browser tabs and place them side by side. The tree view makes structural differences easier to spot than in raw JSON.
+</Callout>
+
+### Using validation and error messages
+
+If your configuration is invalid JSON, JSON Viewer will highlight errors in the editor and may show contextual messages about missing commas or incorrect quotes.
+
+Common issues you can catch:
+
+- Trailing commas after the last item in an object or array.
+- Unquoted keys or string values.
+- Mixed data types where a consistent type was expected.
+
+Use these messages to fix the JSON until the tree view loads correctly, then re-check your configuration semantics (for example, whether ports are in the expected range).
+
+## Key configuration sections
+
+### App settings
+
+`app` usually contains high-level application information and defaults that affect user-facing behavior.
+
+Common fields include:
+
+- `name` and `version` for metadata.
+- `defaultLocale` or `timezone` for localization.
+- `baseUrl` or `publicUrl` for links and redirects.
+
+JSON Viewer helps you confirm:
+
+- All required fields exist under `app`.
+- Values have the expected types (for example, `string` for `name`, not `number`).
+- Any nested objects like `theme` or `ui` are structured consistently.
+
+### Server settings
+
+`server` groups settings related to network behavior and timeouts.
+
+Typical contents:
+
+- `port` and `host` for binding the server.
+- `https` flags and certificate paths.
+- `requestTimeout` and `keepAliveTimeout`.
+
+When you expand `server` in JSON Viewer, ensure:
+
+- Numeric values like `port` are numbers, not strings, unless your app expects strings.
+- Related timeouts use the same unit (for example, all in milliseconds).
+- Nested `security` or `cors` objects are present when required.
+
+### Logging settings
+
+`logging` controls what the application logs and where the logs go.
+
+Typical patterns include:
+
+- A global `level` (such as `info`, `debug`, or `error`).
+- A `format` key (for example, `json` or `text`).
+- Per-module overrides in an object like `modules`.
+
+In JSON Viewer you can:
+
+- Expand the `logging` node to see all modules at once.
+- Verify that every module has a valid log level.
+- Confirm that outputs (like `console` or `file`) are set as expected.
+
+The [Configuration Examples](/json-settings-examples) page includes logging-focused examples you can load to see these patterns in action.
+
+### Feature flags and features
+
+`features` is often used to enable or disable parts of an application without deploying new code.
+
+Common structures:
+
+- Simple boolean flags, for example `features.betaDashboard: true`.
+- Nested objects for gradual rollout, such as `features.search.rolloutPercentage`.
+- Groups of related flags for large modules.
+
+JSON Viewer makes it easy to:
+
+- Scan which flags are turned on in each environment.
+- Ensure all flags exist for each environment, reducing misconfiguration.
+- Confirm value types (booleans for simple flags, numbers or strings for more complex rollout data).
+
+<Callout kind="info">
+  Use clear and consistent names for feature flags. Short but descriptive keys, combined with the JSON Viewer tree, make it easier to understand active features in any given environment.
+</Callout>
+
+### Environment-specific configuration
+
+`environments` often encapsulates overrides for different deployment targets like `development`, `staging`, and `production`.
+
+A typical approach:
+
+- Define a `base` configuration with defaults.
+- Provide per-environment overrides that change only what is necessary.
+
+In JSON Viewer, you can:
+
+- Expand the `environments` node and compare keys across `development`, `staging`, and `production`.
+- Verify that critical values such as `baseUrl` or `logLevel` are overridden where needed.
+- Confirm consistent shapes: each environment object should contain the same nested structure, even if values differ.
+
+The [Configuration Examples](/json-settings-examples) page demonstrates both single-file and split-file environment strategies.
+
+### Integrations and third-party services
+
+`integrations` typically contains settings for external services such as payment providers, email services, or analytics platforms.
+
+Common fields:
+
+- `baseUrl` or `endpoint` for API calls.
+- `timeout` and `retry` policies.
+- References to credentials that come from environment variables, for example `env:PAYMENT_PROVIDER_API_KEY`.
+
+Use JSON Viewer to:
+
+- Expand each integration and confirm base URLs and timeouts.
+- Check that environment variable references follow a consistent pattern.
+- Spot missing integration entries before deployment.
+
+## Best practices for JSON settings
+
+### Organizing configuration files
+
+Keep your JSON configuration files maintainable and predictable:
+
+- Use clear top-level sections: `app`, `server`, `logging`, `features`, `environments`, `integrations`.
+- Group related settings together to reduce duplication.
+- Prefer nested objects over flat but ambiguous keys.
+
+JSON Viewer helps you validate that your chosen structure is easy to navigate. If the tree is hard to understand, consider reorganizing your sections.
+
+### Handling environments cleanly
+
+When dealing with multiple environments, avoid copying entire configurations for each environment.
+
+Recommended patterns:
+
+- Have a `base` section or file with default settings.
+- Apply minimal overrides in environment-specific sections or files.
+- Use JSON Viewer to confirm that overrides only touch the intended fields.
+
+Tabs below compare two common approaches conceptually.
+
+<Tabs>
+  <Tab title="Single file with environments" icon="file-text">
+    
+    Use one `config.json` with sections like `base`, `development`, `staging`, and `production` under `environments`. JSON Viewer lets you expand each environment to see differences at a glance.
+
+  </Tab>
+  <Tab title="Split files per environment" icon="folder">
+    
+    Keep `config.base.json` plus `config.development.json`, `config.staging.json`, and `config.production.json`. Load each file into JSON Viewer separately to check for structural consistency, especially when teams edit them independently.
+
+  </Tab>
+</Tabs>
+
+### Avoiding secrets in JSON config
+
+Configuration files often live in source control or shared storage. Avoid putting raw secrets into JSON:
+
+- Do not store API keys, passwords, or tokens directly in JSON.
+- Use references to environment variables instead, such as `env:PAYMENT_PROVIDER_API_KEY`.
+- Keep secret management in your environment or secret store, not in shared configuration files.
+
+JSON Viewer is a helpful final check: when you load your config, scan the tree to ensure no sensitive values appear in plain text.
+
+<Callout kind="danger">
+  Treat any JSON configuration file that contains real secrets as sensitive. If you accidentally commit such a file, rotate the secrets and remove them from configuration, then use environment variables or a secret manager instead.
+</Callout>
+
+### Using JSON Viewer alongside other tools
+
+JSON Viewer complements your existing tooling:
+
+- Use your editor or CI pipeline for schema validation or type-checking.
+- Use JSON Viewer to quickly inspect, debug, and explain configuration to teammates.
+- Refer to [Configuration Examples](/json-settings-examples) as templates when designing new configuration layouts.
+
+For a broader tour of JSON Viewer capabilities beyond configuration files, visit the main [Guide](/guide).

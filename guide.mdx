@@ -7,19 +7,21 @@ description: Step-by-step instructions on utilizing the core features of JSON Vi
 
 JSON Viewer helps you view, validate, beautify, and export JSON data efficiently. Paste your JSON into the editor to explore nested structures, catch syntax errors, format for readability, and download results in multiple formats. This guide walks you through each core feature.
 
+JSON is a simple text format that stores data as pairs of names and values, such as a user name or a list of items. Many apps, websites, and APIs use JSON to send and receive data.
+
 <Columns cols={2}>
-  <Card title="View & Navigate" icon="search" href="#viewing">
-    Expand and collapse objects to inspect data deeply.
+  <Card title="View & Navigate" icon="search" href="#viewing-and-navigating-json-structures">
+    Expand and collapse objects to inspect data clearly.
   </Card>
-  <Card title="Validate & Beautify" icon="check-circle" href="#validation">
-    Spot errors and reformat instantly.
+  <Card title="Validate & Beautify" icon="check-circle" href="#validating-json-for-errors">
+    Spot errors and reformat in one click.
   </Card>
-  <Card title="Export Options" icon="download" href="#exporting">
+  <Card title="Export Options" icon="download" href="#exporting-results">
     Save as JSON, CSV, or copy to clipboard.
   </Card>
 </Columns>
 
-## Viewing and Navigating JSON Structures
+## Viewing and navigating JSON structures
 
 Access the viewer at [jsonviewer.ai](https://jsonviewer.ai). Paste your JSON to start.
 
@@ -51,21 +53,21 @@ Access the viewer at [jsonviewer.ai](https://jsonviewer.ai). Paste your JSON to 
     ```
     </CodeGroup>
   </Step>
-  <Step title="Navigate Tree" icon="git-branch">
-    Click arrows to expand `{`objects`}` or `{`arrays`}`. Search with Ctrl+F to find keys like `user.name`.
+  <Step title="Navigate tree" icon="git-branch">
+    Click arrows to expand `objects` or `arrays`. Use <kbd>Ctrl</kbd>+<kbd>F</kbd> (or your browser search) to find keys like `user.name`.
   </Step>
-  <Step title="Copy Path" icon="copy">
-    Right-click any value to copy its JSON path, e.g. `user.orders[0].id`.
+  <Step title="Copy path" icon="copy">
+    Right-click any value to copy its JSON path, for example `user.orders[0].id`.
   </Step>
 </Steps>
 
 <Callout kind="tip">
-  Use the tree view for complex nested data. Hover over values for tooltips with types like `string` or `number`.
+  Use the tree view for complex nested data. Hover over values to see helpful tooltips with types such as `string` or `number`.
 </Callout>
 
-## Validating JSON for Errors
+## Validating JSON for errors
 
-Ensure your JSON is syntactically correct before processing.
+Ensure your JSON is syntactically correct before you use or share it.
 
 <Tabs>
   <Tab title="Valid JSON" icon="check-circle">
@@ -80,7 +82,7 @@ Ensure your JSON is syntactically correct before processing.
     }
     ```
     
-    The viewer highlights it in green.
+    The viewer highlights valid JSON in green.
   </Tab>
   <Tab title="Invalid JSON" icon="x-circle">
     Try malformed input:
@@ -92,24 +94,24 @@ Ensure your JSON is syntactically correct before processing.
     }
     ```
     
-    Errors appear in red with line numbers and fixes.
+    Errors appear in red with line numbers and hints on what to fix.
   </Tab>
 </Tabs>
 
 <Callout kind="alert">
-  Always validate large API responses. Common issues include trailing commas or unquoted keys.
+  Always validate large API responses. Common issues include trailing commas, missing commas, or keys that are not wrapped in quotes.
 </Callout>
 
-## Beautifying and Formatting JSON
+## Beautifying and formatting JSON
 
-Transform minified JSON into readable format.
+Transform minified JSON into a readable format.
 
 <Steps>
-  <Step title="Auto-Beautify" icon="magic">
-    Paste minified JSON. Click "Beautify" to add indentation and line breaks.
+  <Step title="Auto-beautify" icon="magic">
+    Paste minified JSON. Click "Beautify" to add indentation and line breaks for easier reading.
   </Step>
   <Step title="Customize" icon="settings">
-    Adjust indent size (2 or 4 spaces) and toggle quotes for keys.
+    Adjust indent size (2 or 4 spaces) and toggle options such as always showing quotes for keys.
   </Step>
 </Steps>
 
@@ -133,16 +135,16 @@ Beautified:
 }
 ```
 
-## Exporting Results
+## Exporting results
 
 Save your processed JSON easily.
 
 <Tabs>
   <Tab title="Download JSON" icon="download">
-    Click "Download JSON" for a `.json` file.
+    Click "Download JSON" to save your data as a `.json` file.
   </Tab>
-  <Tab title="Copy Formatted" icon="copy">
-    Select "Copy to Clipboard" for the beautified version.
+  <Tab title="Copy formatted" icon="copy">
+    Select "Copy to Clipboard" to copy the beautified version and paste it into another tool.
   </Tab>
   <Tab title="Convert to CSV" icon="table">
     For flat arrays, export as CSV:
@@ -154,8 +156,21 @@ Save your processed JSON easily.
   </Tab>
 </Tabs>
 
+## Best practices
+
+- When working with very large JSON files, start with a smaller sample so the viewer stays fast and easy to use.
+- Avoid pasting sensitive data such as passwords, tokens, or personal details. If you must work with real data, mask or change those values first.
+- Validate often while you edit. Make a small change, validate, then continue. This makes it easier to find what broke the JSON.
+- Use clear, realistic example data (for example, real-looking names, emails, and product names) so teammates can understand structures at a glance.
+- Keep a copy of the original JSON when you experiment, so you can quickly go back if something goes wrong.
+- When sharing screenshots or snippets, remove or blur anything private or confidential.
+
+<Callout kind="info">
+  For details on limits, troubleshooting, and how we handle security and privacy, see the [FAQ](/faq).
+</Callout>
+
 <Expandable title="Advanced Export Tips" default-open="false">
   Use browser extensions for bulk exports. For APIs, pipe responses directly via `curl | beautify`.
 </Expandable>
 
-Master these features to handle JSON workflows faster. Experiment with your own data for best results.
+Master these features to handle JSON workflows faster. Try them with your own data to see what works best for you.

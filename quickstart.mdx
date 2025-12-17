@@ -3,76 +3,80 @@ title: Quick Start with JSON Viewer
 description: Learn how to quickly access and use JSON Viewer to handle your first JSON file in minutes.
 ---
 
-## Get Started in Minutes
+## Get started in minutes
 
-JSON Viewer provides a free online tool at `jsonviewer.ai` to view, validate, and beautify your JSON data. You handle complex structures effortlessly without installing software. Follow these steps to process your first JSON file.
+JSON Viewer provides a free online tool at `jsonviewer.ai` to view, validate, and beautify your JSON data. You can handle complex data structures in your browser without installing any software.
+
+JSON is a common text format that apps and websites use to store and send data, such as settings, reports, or API responses. Inspecting JSON helps you see exactly what data is being sent or stored so you can understand, debug, or share it more easily.
+
+Follow these steps to process your first JSON file.
 
 <Columns cols={3}>
-  <Card title="Access Tool" icon="globe" href="https://jsonviewer.ai">
-    Visit the site and start immediately.
+  <Card title="Access tool" icon="globe" href="https://jsonviewer.ai">
+    Visit the site in your browser and start immediately.
   </Card>
-  <Card title="Paste or Upload" icon="upload" href="#">
-    Load your JSON data quickly.
+  <Card title="Paste or upload" icon="upload" href="#">
+    Load your JSON data quickly from text or a file.
   </Card>
-  <Card title="Validate & Beautify" icon="check-circle" href="#">
-    Explore features like tree view and error checking.
+  <Card title="Validate and beautify" icon="check-circle" href="#">
+    Explore features like tree view, formatting, and error checking.
   </Card>
 </Columns>
 
 ## Step 1: Access JSON Viewer
 
-Visit `https://jsonviewer.ai` in your browser. No account or signup required. The tool loads instantly for immediate use.
+Visit `https://jsonviewer.ai` in your browser. No account or signup is required, and everything runs in your browser only. The tool loads instantly for immediate use.
 
 <Callout kind="tip">
   Bookmark `jsonviewer.ai` for quick access on future visits.
 </Callout>
 
-## Step 2: Load Your JSON Data
+## Step 2: Load your JSON data
 
 Choose between pasting text or uploading a file.
 
 <Tabs>
   <Tab title="Paste JSON" icon="clipboard">
-    Copy your JSON and paste it directly.
+    Copy your JSON and paste it directly into the main text area.
 
     <Steps>
       <Step title="Copy JSON">
-        Select realistic data like this API response:
+        Select some realistic data, such as this API response example.
       </Step>
-      <Step title="Paste Data">
+      <Step title="Paste data">
         ```json
         {"user":{"id":123,"name":"Jane Doe","email":"jane@example.com","orders":[{"id":456,"total":29.99},{"id":789,"total":15.50}]}}
         ```
       </Step>
     </Steps>
   </Tab>
-  <Tab title="Upload File" icon="upload">
-    Drag and drop or select a `.json` file.
+  <Tab title="Upload file" icon="upload">
+    Drag and drop or select a `.json` file from your computer.
 
     <Steps>
-      <Step title="Prepare File">
-        Save JSON to a file named `data.json`.
+      <Step title="Prepare file">
+        Save your JSON data to a file named `data.json` (or any name ending in `.json`).
       </Step>
       <Step title="Upload">
-        Drag the file into the upload area or click "Choose File".
+        Drag the file into the upload area or click `Choose File` and select your JSON file.
       </Step>
     </Steps>
   </Tab>
 </Tabs>
 
-## Step 3: Explore the Interface
+## Step 3: Explore the interface
 
-Once loaded, discover these core features:
+After your JSON loads, explore these core features:
 
 <ExpandableGroup>
-  <Expandable title="Tree View" default-open="true">
-    Expand and collapse nested objects. Click nodes to navigate deep structures like `{user.orders}` arrays.
+  <Expandable title="Tree view" default-open="true">
+    Expand and collapse nested objects to see the structure of your data. Click the arrows to drill into arrays and objects, such as a `user` object or an `orders` list.
   </Expandable>
   <Expandable title="Validation">
-    The tool highlights syntax errors in red. Fix issues like missing commas or invalid values.
+    The tool highlights syntax errors in red. This helps you spot issues such as missing commas, extra quotes, or invalid values so you can fix them quickly.
   </Expandable>
   <Expandable title="Beautify">
-    Click "Beautify" to format minified JSON for readability.
+    Click `Beautify` to format minified JSON into a clean, indented layout that is easier to read and understand.
   </Expandable>
 </ExpandableGroup>
 
@@ -102,9 +106,36 @@ Once loaded, discover these core features:
 </CodeGroup>
 
 <Callout kind="success">
-  Your JSON now displays with syntax highlighting, making `{nested}` objects easy to scan.
+  Your JSON now displays with syntax highlighting, making nested objects and arrays easy to scan.
 </Callout>
 
-## Next Steps
+## Troubleshooting your first JSON
 
-Copy formatted JSON, download as a file, or share via URL. Experiment with larger datasets to see validation in action. This quickstart equips you to handle real-world JSON from APIs or logs efficiently.
+If something does not look right when you load your JSON, try these quick checks:
+
+- **Red error highlight or message**  
+  Your JSON is likely missing a comma, quote, or brace. Scroll to the highlighted line, compare with the examples above, and fix the typo. If you copied from a website, make sure you did not include extra text like comments or HTML.
+
+- **Nothing appears in the tree view**  
+  Confirm that the text area is not empty and that what you pasted is valid JSON, not plain text or another format (for example, CSV). If your data starts with `(` or has `=` before it, remove that extra text and try again.
+
+- **File feels too large or slow to load**  
+  Very large JSON files can be slow to display in a browser. Try trimming the file to a smaller part, such as a single object or page of results, then reload that portion to inspect it.
+
+- **I am not sure if my data is safe to paste**  
+  JSON Viewer runs entirely in your browser and does not send your data to a server, but you should still avoid sharing sensitive data with other people. Remove or mask private details such as passwords or personal identifiers before saving or sharing.
+
+For more in-depth troubleshooting, limits, and privacy details, see the [FAQ](/faq).
+
+## Next steps
+
+Once your JSON looks correct, you can:
+
+- Copy the formatted JSON directly from the viewer.
+- Download it as a cleaned-up `.json` file for later use.
+- Share the formatted JSON with teammates or use it in your own tools.
+
+To go further:
+
+- Read the full [User Guide](/guide) for detailed coverage of features such as search, collapsing sections, and working with large or complex JSON.
+- Visit the [FAQ](/faq) for troubleshooting tips, known limitations, and privacy and security information.

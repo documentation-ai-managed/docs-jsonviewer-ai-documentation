@@ -3,19 +3,29 @@ title: Frequently Asked Questions
 description: Answers to common queries about JSON Viewer to help resolve doubts and optimize your experience.
 ---
 
-## Common Usage Issues
+This page answers common questions about using JSON Viewer. If you are just getting started, see the [Quick Start](/quickstart) and [User Guide](/guide) for step-by-step help.
 
-JSON Viewer handles most JSON data smoothly, but you might encounter parsing errors with malformed input or large files. Follow these steps to troubleshoot.
+## Common usage issues
+
+JSON Viewer handles most JSON data smoothly, but you might see parsing errors if the input is broken or the file is very large. Follow these steps to troubleshoot.
+
+If this is your first time loading JSON, see **Troubleshooting your first JSON** in the [Quick Start](/quickstart) for a guided walkthrough.
 
 <Steps>
-  <Step title="Paste or Upload JSON" icon="upload">
-    Copy your JSON data and paste it into the editor, or upload a `.json` file. Ensure no trailing commas or unescaped quotes.
+  <Step title="Paste or upload JSON" icon="upload">
+
+    Copy your JSON data and paste it into the editor, or upload a `.json` file. Try to avoid trailing commas or unescaped quotes, as these can cause errors.
+
   </Step>
-  <Step title="Check for Errors" icon="alert-triangle">
-    Look for red highlights indicating syntax issues. Common problems include missing brackets or invalid values.
+  <Step title="Check for errors" icon="alert-triangle">
+
+    Look for red highlights that show where the syntax issue is. Common problems include missing brackets, missing commas, or invalid values.
+
   </Step>
-  <Step title="Validate and Beautify" icon="check-circle">
-    Click **Validate** to scan for errors. Use **Beautify** to format readable output.
+  <Step title="Validate and beautify" icon="check-circle">
+
+    Click **Validate** to scan for errors. Use **Beautify** to clean up the spacing and indentation so the JSON is easier to read.
+
   </Step>
 </Steps>
 
@@ -41,24 +51,30 @@ JSON Viewer handles most JSON data smoothly, but you might encounter parsing err
 </CodeGroup>
 
 <Callout kind="tip">
-  For files `>10MB`, split them or use desktop tools like VS Code with JSON extensions.
+
+  For files larger than `10MB`, try splitting them into smaller parts or use desktop tools like VS Code with JSON extensions.
+
 </Callout>
 
-## Data Privacy and Security
+## Data privacy and security
 
-You process all JSON data client-side in your browser. JSON Viewer does not store, log, or transmit your data to any servers.
+JSON Viewer processes your JSON directly in your browser. Your data is not sent to a server, and it is not stored or logged by the site.
 
 <Callout kind="info">
-  No data leaves your device. Validation and beautification happen locally using JavaScript, ensuring complete privacy.
+
+  No data leaves your device. Validation and beautification happen locally using JavaScript in your browser, so your information stays with you.
+
 </Callout>
 
 <Callout kind="success">
-  Your sensitive data, like API responses or user profiles, remains secure. Clear the editor or refresh the page to remove content.
+
+  This means you can safely view sensitive data, like API responses or user profiles. When you are done, clear the editor or refresh the page to remove the content from your screen.
+
 </Callout>
 
-## Tool Limitations and Alternatives
+## Tool limitations and alternatives
 
-JSON Viewer excels at quick viewing and validation but has limits on file size and lacks editing features.
+JSON Viewer is designed for quick viewing and validation of JSON in your browser. It has some limits on file size and does not include full editing features.
 
 | Limitation | Details | Workaround |
 |------------|---------|------------|
@@ -67,13 +83,18 @@ JSON Viewer excels at quick viewing and validation but has limits on file size a
 | Browser-Only | No desktop app | Use extensions or CLI tools |
 
 <ExpandableGroup>
-  <Expandable title="Desktop Alternatives" default-open="true">
+  <Expandable title="Desktop alternatives" default-open="true">
+
     Install tools like **JSON Crack** or **Dadroit JSON Viewer** for offline use with larger files.
+
   </Expandable>
-  <Expandable title="Browser Extensions">
-    Try **JSON Viewer** Chrome extension for automatic formatting in DevTools.
+  <Expandable title="Browser extensions">
+
+    Try the **JSON Viewer** Chrome extension for automatic formatting in DevTools.
+
   </Expandable>
-  <Expandable title="CLI Options">
+  <Expandable title="CLI options">
+
     Use `jq` for command-line processing:
 
 ````bash
@@ -84,21 +105,31 @@ cat data.json | jq '.'
 </ExpandableGroup>
 
 <Tabs>
-  <Tab title="Online Tools" icon="globe">
+  <Tab title="Online tools" icon="globe">
+
     jsonviewer.ai (free, unlimited views)  
     jsonformatter.org (similar features)
+
   </Tab>
   <Tab title="IDEs" icon="code">
-    VS Code: Install **JSON** extension  
-    IntelliJ: Built-in JSON support
+
+    VS Code: Install a **JSON** extension  
+    IntelliJ: Use the built-in JSON support
+
   </Tab>
 </Tabs>
 
+Most everyday tasks like checking an API response, pretty-printing a JSON file, or quickly spotting errors will work well within these limits.
+
 <Columns cols={2}>
-  <Card title="Need Help?" icon="help-circle" href="https://jsonviewer.ai/contact" target="_blank">
-    Contact support for custom issues.
+  <Card title="Need help?" icon="help-circle" href="https://jsonviewer.ai/contact" target="_blank">
+
+    Contact support if you are stuck or have a question that is not covered here.
+
   </Card>
-  <Card title="Share Feedback" icon="thumbs-up" href="https://github.com/jsonviewer-ai/feedback" target="_blank">
-    Suggest features on GitHub.
+  <Card title="Share feedback" icon="thumbs-up" href="https://github.com/jsonviewer-ai/feedback" target="_blank">
+
+    Suggest features or report issues on GitHub.
+
   </Card>
 </Columns>
